@@ -17,22 +17,23 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 public class ScaryMaze extends JPanel implements Runnable, MouseMotionListener {
-	
+
 	BufferedImage maze;
 	final int frameWidth = 800;
-	final int frameHeight = 600;
+	final int frameHeight = 800;
 
 	ScaryMaze() throws Exception {
-		//1. Use this online tool to make a maze image and drop it into your section5 package: http://pixlr.com/editor/
-		//maze = ImageIO.read(getClass().getResource("standardMaze.jpg"));
-		//2. Change the line of code above so that it matches your maze's file name
-		
-		//3. Set the mouse pointer to the start of your maze using:
-		//new Robot().mouseMove(45, 95);
-		
-		//4. Add a mouse motion listener using:
-		//addMouseMotionListener(this);
-		
+		// 1. Use this online tool to make a maze image and drop it into your section5
+		// package: http://pixlr.com/editor/
+		// maze = ImageIO.read(getClass().getResource("standardMaze.jpg"));
+		// 2. Change the line of code above so that it matches your maze's file name
+		maze = ImageIO.read(getClass().getResource("maze.jpg"));
+		// 3. Set the mouse pointer to the start of your maze using:
+		new Robot().mouseMove(61, 775);
+
+		// 4. Add a mouse motion listener using:
+		addMouseMotionListener(this);
+
 	}
 
 	@Override
@@ -40,36 +41,88 @@ public class ScaryMaze extends JPanel implements Runnable, MouseMotionListener {
 		int mouseX = e.getX();
 		int mouseY = e.getY();
 		int mouseColor = maze.getRGB(mouseX, mouseY);
-		//5. Print the mouseColor variable 
-		
-		//6.  Run your program and put your mouse over the background to find out what color it is
-		
-		//7. Create an int variable that holds the background color. 
-		
-		//8. If the mouse falls off the path (if it is on the background)
-	
-				// call the scare method
-		
-		//13. If the mouse is on the end color
-		
-				// pop up a message to tell them they won
-		
+		// 5. Print the mouseColor variable
+		System.out.println(mouseY);
+		// 6. Run your program and put your mouse over the background to find out what
+		// color it is
+
+		// 7. Create an int variable that holds the background color.
+		int backgroundColor = -15790321;
+		int trapColor = -456192;
+		// 8. If the mouse falls off the path (if it is on the background)
+		if (mouseColor == backgroundColor) {
+			// call the scare method
+			scare();
+		}
+		if (mouseColor == trapColor) {
+			troll();
+		}
+		// 13. If the mouse is on the end color
+		if (mouseColor == -9178613) {
+			// pop up a message to tell them they won
+			for (int i = 0; i < 100; i++) {
+				JOptionPane.showMessageDialog(null, "YOU WON");
+			}
+			for (int i = 0; i < 100; i++) {
+				JOptionPane.showMessageDialog(null, "CONGRATULATIONS");
+			}
+			for (int i = 0; i < 100; i++) {
+				JOptionPane.showMessageDialog(null, "THANK YOU FOR PLAYING");
+			}
+			for (int i = 0; i < 100; i++) {
+				JOptionPane.showMessageDialog(null, "GOOD BYE");
+			}
+		}
 	}
 
 	private void scare() {
 		System.out.println("BOO!");
-		//9. Find a scary sound and put it in the section5 package where you put your maze picture. You can find a sound on freesound.org. Log in as leagueofamazing/code4life.
-		
-		//10. Use the code below to load your sound.  Change the file name to match the name of your sound file.  
-		//AudioClip sound = JApplet.newAudioClip(getClass().getResource("standardScarySound.wav"));
-		
-		//11. Play the scary sound. Hint: type "sound" and then a period.		
-		
-		//12. Drop an image into your section5 package, and use the showScaryImage method to scare your victim!
-		
+		// 9. Find a scary sound and put it in the section5 package where you put your
+		// maze picture. You can find a sound on freesound.org. Log in as
+		// leagueofamazing/code4life.
+
+		// 0. Use the code below to load your sound. Change the file name to match the
+		// name of your sound file.
+		// AudioClip sound =
+		// JApplet.newAudioClip(getClass().getResource("standardScarySound.wav"));
+		AudioClip sound = JApplet.newAudioClip(getClass().getResource("333832__nick121087__demonic-woman-scream.wav"));
+		// 11. Play the scary sound. Hint: type "sound" and then a period.
+		sound.play();
+		// 12. Drop an image into your section5 package, and use the showScaryImage
+		// method to scare your victim!
+		showScaryImage("download.jpeg");
+
+	}
+
+	private void troll() {
+		System.out.println("HAHA!");
+		// 9. Find a scary sound and put it in the section5 package where you put your
+		// maze picture. You can find a sound on freesound.org. Log in as
+		// leagueofamazing/code4life.
+		AudioClip sound = JApplet.newAudioClip(getClass().getResource("377585__yudena__laugh-troll-bymondfisch89.wav"));
+		// 10. Use the code below to load your sound. Change the file name to match the
+		// name of your sound file.
+		// AudioClip sound =
+		// JApplet.newAudioClip(getClass().getResource("standardScarySound.wav"));
+		sound.play();
+		// 11. Play the scary sound. Hint: type "sound" and then a period.
+
+		// 12. Drop an image into your section5 package, and use the showScaryImage
+		// method to scare your victim!
+		showTrollImage("th.jpeg");
+
 	}
 
 	private void showScaryImage(String imageName) {
+		try {
+			maze = ImageIO.read(getClass().getResource(imageName));
+		} catch (Exception e) {
+			System.err.println("Couldn't find this image: " + imageName);
+		}
+		repaint();
+	}
+
+	private void showTrollImage(String imageName) {
 		try {
 			maze = ImageIO.read(getClass().getResource(imageName));
 		} catch (Exception e) {
@@ -99,9 +152,7 @@ public class ScaryMaze extends JPanel implements Runnable, MouseMotionListener {
 	}
 
 	@Override
-	public void mouseDragged(MouseEvent e) {}
+	public void mouseDragged(MouseEvent e) {
+	}
 
 }
-
-
-
